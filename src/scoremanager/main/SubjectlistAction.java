@@ -24,12 +24,11 @@ public class SubjectlistAction extends Action{
 		String subjectCd="";
 		String  subjectName= "";
 
-		SubjectDao subDao = new SubjectDao();//科目DAO
+		SubjectDao subDao = new SubjectDao();//科目DAOのインスタンスを初期化
 
 
 		Map<String, String> errors = new HashMap<>();
 
-		System.out.println(teacher);
 		List<Subject> list = subDao.filter(teacher);
 
 		//リクエストにデータをセット

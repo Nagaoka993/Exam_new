@@ -18,23 +18,38 @@
 			</div>
 			<form action="Subjectlist.action">
 				<div class="row border mx-3 mb-3 py-2 aligin-items-center rounded" id ="filter">
-					<div class="col-4">
+					<div class="col-12">
 					<style>
-					td {
-  					border-bottom: 1px solid #000; /* 下線のスタイル */
-  					padding-bottom: 5px; /* 下線とテキストの間隔 */
-						}
+				table {
+				  	border-collapse: collapse;
+  					width: 100%;
+  					border-collapse: collapse; /* セルの枠線を統合 */
+					}
+				td {
+  					border-top: none;    /* 上線を消す */
+  					border-right: none;   /* 右線を消す */
+  					border-left: none;    /* 左線を消す */
+  					border-bottom: 1px solid #ccc; /* 下線のスタイル */
+  					padding-bottom: 7px; /* 下線とテキストの間隔 */
+  					padding-top: 7px;
+					}
+					th:nth-child(1), td:nth-child(1) { width: 10%; } /* 科目コード */
+					th:nth-child(2), td:nth-child(2) { width: 30%; } /* 科目名 */
+					th:nth-child(3), td:nth-child(3) { width: 10%; } /* 変更ボタン */
+					th:nth-child(4), td:nth-child(4) { width: 10%; } /* 削除ボタン */
+					th:nth-child(5), td:nth-child(5) { width: 40%; } /* 右側の余白 */
 					</style>
 						<label class="form-label" for=subject-f1-select></label>
-						<table border="1">
+						<table style="width: 100%;">
 						<tr>
-							<th>科目コード</th>
-							<th>科目名</th>
+							<td colspan="5" style="font-weight: 900;"style="border-bottom: 1px solid #ccc; padding-bottom: 5px;">科目コード　　　&nbsp;&nbsp;&nbsp;科目名</td>
 						</tr>
 						<c:forEach var="subject" items="${subject}">
 						<tr>
 							<td>${subject.cd}</td>
 							<td>${subject.name}</td>
+							<td><a href="StudentUpdate.action?cd=${subject.cd}">変更</a></td>
+							<td><a href="StudnetDelete.adtion"></a>削除</td>
 						</tr>
 						</c:forEach>
 					</table>
