@@ -1,36 +1,43 @@
 package bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestListSubject {
-	private String subjectName;
-	private String subjectCd;
-	private int num;
-	private int point;
+	private int entYear;//入学年度
+	private String studentNo;//学生番号
+	private String studentName;//学生名
+	private String classNum;//クラス番号
+	private Map<Integer, Integer> points = new HashMap<>();//1回目の得点,2回目の得点
 
-	public String getSubjectName(){
-		return subjectName;
+	public int getEntYear(){
+		return entYear;
 	}
-	public void setSubjectName(String subjectName){
-		this.subjectName = subjectName;
+	public void setEntYear(int entYear){
+		this.entYear = entYear;
 	}
-	public String getSubjectCd(){
-		return subjectCd;
+	public String getStudentNo(){
+		return studentNo;
 	}
-	public void setSubjectCd(String Subject){
-		this.subjectCd = subjectCd;
+	public void setStudentNo(String studentNo){
+		this.studentNo = studentNo;
 	}
-	public int getNum(){
-		return num;
+	public String getStudentName(){
+		return studentName;
 	}
-	public void setNum(int num){
-		this.num = num;
+	public void setStudentName(String studentName){
+		this.studentName = studentName;
 	}
-
-	/*
-	public int getPoint(){
-		return point;
+	public String getClassNum(){
+		return classNum;
 	}
-	public void setPoint(int point){
-		this.point = point;
+	public void setClassNum(String classNum){
+		this.classNum = classNum;
 	}
-	*/
+	public Map<Integer,Integer> getPoints(){
+		return points;
+	}
+	public void setPoints(Map<Integer,Integer> points){
+		this.points = points;
+	}
 }

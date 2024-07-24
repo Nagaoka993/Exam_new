@@ -45,6 +45,7 @@ public class TestListAction extends Action{
 			list = testliststudentDao.filter(student);
 
 			//一覧ページで表示させたい情報をセッションに渡す
+			req.setAttribute("student", student);
 			req.setAttribute("student_list",list);
 
 			//学生別成績一覧表示する;

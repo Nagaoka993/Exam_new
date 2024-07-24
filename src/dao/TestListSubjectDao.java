@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import bean.Student;
+import bean.School;
+import bean.Subject;
 import bean.TestListSubject;
 
 public class TestListSubjectDao extends Dao{
@@ -22,10 +25,13 @@ public class TestListSubjectDao extends Dao{
 				//学生別テスト結果インスタンスを初期化
 				TestListSubject testlistsubject = new TestListSubject();
 				//学生別テスト結果インスタンスに検索結果をセット
-				testlistsubject.setSubjectName(rSet.getString("name"));
-				testlistsubject.setSubjectCd(rSet.getString("subject_cd"));
-				testlistsubject.setNum(rSet.getInt("no"));
-				testlistsubject.setPoint(rSet.getInt("point"));
+				testlistsubject.setEntYear(rSet.getInt(""));
+				testlistsubject.setClassNum(rSet.getString(""));
+				testlistsubject.setStudentNo(rSet.getString(""));
+				testlistsubject.setStudentName(rSet.getString(""));
+				//1回目のポイントと2回目のポイントを格納するディクショナリー
+				Map<Integer, Integer> points = new HashMap<>();
+				testlistsubject.setPoints(points);
 				list.add(testlistsubject);
 			}
 		}catch(SQLException | NullPointerException e){
@@ -35,7 +41,7 @@ public class TestListSubjectDao extends Dao{
 	}
 
 	//
-	public List<TestListSubject> filter(Student student) throws Exception{
+	public List<TestListSubject> filter(int entYer,String classNum,Subject subject,School school) throws Exception{
 		//リストを初期化
 		List<TestListSubject> list = new ArrayList<>();
 		//コネクションを確立
@@ -48,7 +54,11 @@ public class TestListSubjectDao extends Dao{
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(
 					//テストテーブルの結果に科目cdを付け足す
-					"select*from test t  join  subject s on t.subject_cd = s.cd where student_name=?");
+					"select  "
+					+ 		"case when no = 1 then point end as 1回目,*"
+					+ 			" when no = 2 then point end as 2回目,"
+					+ ""
+					+ "from test t  join  subject s on t.subject_cd = s.cd where student_n=?");
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1,student.getNo());
 			//プライベートステートメントを実行
