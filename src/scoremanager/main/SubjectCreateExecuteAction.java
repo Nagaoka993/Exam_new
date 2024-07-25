@@ -1,5 +1,4 @@
 package scoremanager.main;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,14 +10,12 @@ import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
-
 public class SubjectCreateExecuteAction extends Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		//セッションを取得
-		HttpSession session = req.getSession();
-
-		//データベースアクセスのためのDAOをインスタンス化
+	//セッションを取得
+	HttpSession session = req.getSession();
+	//データベースアクセスのためのDAOをインスタンス化
 		SubjectDao subDao  = new SubjectDao(); //科目情報
 
 		//変数宣言と初期化

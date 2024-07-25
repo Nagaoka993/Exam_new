@@ -153,17 +153,20 @@ public class SubjectDao extends Dao{
 				//科目が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
 				statement = connection.prepareStatement(
-						"insert into subject(cd, name) values(?, ?)");
+						"insert into subject(cd, name, school_cd) values(?, ?, ?)");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, subject.getCd());
 				statement.setString(2, subject.getName());
+				statement.setString(3, subject.getSchool().getCd()); //School_cdを追加
 			} else {
 				//科目が存在した場合
 				//プリペアードステートメントにUPDATE文を設置
 				statement = connection.prepareStatement(
-						"update subject set name = ?");
+						"update subject set name = ? where cd = ? and school_cd = ?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, subject.getName());
+				statement.setString(2, subject.getCd()); //更新対象の科目コード
+				statement.setString(3,subject.getSchool().getCd());
 			}
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
