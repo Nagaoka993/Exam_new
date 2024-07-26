@@ -30,7 +30,7 @@ public class TestListSubjectDao extends Dao{
 				testlistsubject.setStudentNo(rSet.getString(""));
 				testlistsubject.setStudentName(rSet.getString(""));
 				//1回目のポイントと2回目のポイントを格納するディクショナリー
-				Map<Integer, Integer> points = new HashMap<>();
+				Map<Integer, Integer> points = new HashMap<>(rSet.getInt("1回目"),rSet.getInt("2回目"));
 				testlistsubject.setPoints(points);
 				list.add(testlistsubject);
 			}
@@ -41,7 +41,7 @@ public class TestListSubjectDao extends Dao{
 	}
 
 	//
-	public List<TestListSubject> filter(int entYer,String classNum,Subject subject,School school) throws Exception{
+	public List<TestListSubject> filter(int entYear,String classNum,Subject subject,School school) throws Exception{
 		//リストを初期化
 		List<TestListSubject> list = new ArrayList<>();
 		//コネクションを確立
@@ -54,13 +54,27 @@ public class TestListSubjectDao extends Dao{
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(
 					//テストテーブルの結果に科目cdを付け足す
-					"select  "
-					+ 		"case when no = 1 then point end as 1回目,*"
-					+ 			" when no = 2 then point end as 2回目,"
-					+ ""
-					+ "from test t  join  subject s on t.subject_cd = s.cd where student_n=?");
-			//プリペアードステートメントに学生番号をバインド
-			statement.setString(1,student.getNo());
+					"SELECT"
+					 +"s.ent_year,s.class_num,s.no,s.name,"
+					 +"MAX(CASE WHEN t.NO = 1 THEN t.POINT ELSE NULL END) AS 1回目"
+					 +"MAX(CASE WHEN t.NO = 2 THEN t.POINT ELSE NULL END) AS 2回目"
+					 +"FROM test t"
+					 +"join"
+					 +"student s on t.student_no = s.NO"//学生番号を条件に結合する
+					 +"where"//取得したい行を絞り込む
+					 +"s.ent_year = ? and t.class_num=? t.subject_cd = ?"
+					 +"t.school_cd=?"
+					 +"GROUP BY"//学生番号と科目コードの一致する行を結合する
+					 +"t.STUDENT_NO,"
+					 +"t.SUBJECT_CD"
+					 +"ORDER BY"
+					 +"t.STUDENT_NO,"
+					 +"t.SUBJECT_CD");
+			//プリペアードステートメントにバインド
+			statement.setInt(1,entYear);//入学年度
+			statement.setString(2,classNum);//クラス番号
+			statement.setString(3,subject.getCd());//科目コード
+			statement.setString(4,school.getCd());//学校コード
 			//プライベートステートメントを実行
 			rSet = statement.executeQuery();
 			//リストへの格納処理を実行

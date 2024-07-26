@@ -48,7 +48,7 @@ public class TestListStudentDao extends Dao{
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(
 					//テストテーブルの結果に科目cdを付け足す
-					"select*from test t  join  subject s on t.subject_cd = s.cd where student_no=?");
+					"select*from test t  join  subject s on t.subject_cd = s.cd where s.student_no=?");
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1,student.getNo());
 			//プライベートステートメントを実行
