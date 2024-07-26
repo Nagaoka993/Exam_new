@@ -21,13 +21,13 @@
 					<div class="my-3">
 						<label class="form-label" for="subject-cd-input">科目コード</label>
 						<input type="text" class="form-control" id="subject-cd-input" name="cd"
-						placeholder="科目コードを入力してください" size="95" maxlength="3" value="${cd}" required><br>
+						placeholder="科目コードを入力してください" size="95" maxlength="3" value="${cd}" required>
 						<div class="mt-2 text-warning">${errors.get("cd")}</div>
 					</div>
 					<div class="my-3">
 						<label class="form-label" for="subject-cd-input">科目名</label>
 						<input type="text" class="form-control" id="subject-name-input" name="name"
-						placeholder="科目名を入力してください" size="95" maxlength="20" value="${name}" required><br>
+						placeholder="科目名を入力してください" size="95" maxlength="20" value="${name}" required>
 						<div class="mt-2 text-warning">${errors.get("name")}</div>
 					</div>
 						<input type="submit" value="登録" name="create_btn">
