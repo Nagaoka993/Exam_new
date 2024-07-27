@@ -42,6 +42,6 @@ public class TestListAction extends Action{
 		req.setAttribute("subjectname_list",subjectname_list);
 		req.setAttribute("classnum_list", classnum_list);
 
-	return "../studentmanager/testlist.jsp";
+	return "../studentmanager/test_list.jsp";
 	}
 }
