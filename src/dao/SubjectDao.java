@@ -308,7 +308,7 @@ public class SubjectDao extends Dao{
 			rSet = statement.executeQuery();
 			//結果をリストに格納する
 			while(rSet.next()){
-				list.add(rSet.getString("subject"));
+				list.add(rSet.getString("name"));
 			}
 		}catch(Exception e){
 			throw e;
