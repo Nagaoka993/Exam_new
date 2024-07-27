@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.List" %>
-<% List<String> entYearList = (List<String>) request.getAttribute("ent_year_list"); %>
+<%@ page import="java.util.ArrayList" %>
+<% ArrayList<String> ent_year_list = (ArrayList<String>) request.getAttribute("ent_year_list"); %>
+<% ArrayList<String> classnum_list = (ArrayList<String>) request.getAttribute("classnum_list"); %>
+<% ArrayList<String> subjectname_list = (ArrayList<String>) request.getAttribute("subjectname_list"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,28 +16,40 @@
     <h2>科目情報で検索</h2>
     <form action="TestListSubjectExecuteAction.do" method="post">
         <label for="ent_year">入学年度:</label>
+        <div>
         <select id="ent_year" name="ent_year">
             <option>-- 選択してください --</option>
-   			<c:forEach var="ent_year" items="${ent_year_list} ">
-			<option><c:out value="${ent_year}" /></option>
-   			</c:forEach>
+   			<% for(int i = 0; i < ent_year_list.size(); i++) { %>
+   			<option>
+			<%= ent_year_list.get(i)%>
+			</option>
+			<% } %>
+        </select></div>
 
-        </select><br>
+        <label for="class_num">クラス:</label>
+        <div>
+        <select id="class_num" name="class_num">
+            <option>-- 選択してください --</option>
+   			<% for(int i = 0; i < classnum_list.size(); i++) { %>
+   			<option>
+			<%= classnum_list.get(i)%>
+			</option>
+			<% } %>
+        </select></div>
 
-        <label for="subject_name">科目:</label>
-        <select id="subject_name" name="subject_name">
-            <option value="">-- 選択してください --</option>
-            %>
-        </select><br><br>
+        <label for="subjectname">科目:</label>
+        <div>
+        <select id="subjectname" name="subjectname">
+            <option>-- 選択してください --</option>
+   			<% for(int i = 0; i < subjectname_list.size(); i++) { %>
+   			<option>
+			<%= subjectname_list.get(i)%>
+			</option>
+			<% } %>
+        </select></div>
 
-        <input type="submit" value="検索">
-    </form>
+        <input class="btn btn-primary" type="submit" value="検索">
 
-    <h2>学生番号で検索</h2>
-    <form action="TestListSubjectExecuteAction.do" method="post">
-        <label for="student_num">学生番号:</label>
-        <input type="text" id="student_num" name="student_num"><br><br>
-        <input type="submit" value="検索">
     </form>
 </body>
 </html>
