@@ -318,14 +318,14 @@ public class StudentDao extends Dao{
 		}
 	}
 	//与えた教員インスタンスの所属する生徒の入学年度の一覧を返す
-	public List<String> getEntYearList(Teacher teacher)throws Exception{
+	public ArrayList<String> getEntYearList(Teacher teacher)throws Exception{
 		//コネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 		//リザルトセット
 		ResultSet rSet = null;
-		List<String> list = new ArrayList<>();
+		ArrayList<String> list = new ArrayList<>();
 		try {
 			//プリペアードステートメントにselect文を設置
 			statement = connection

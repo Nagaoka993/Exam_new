@@ -16,9 +16,9 @@ import bean.TestListSubject;
 public class TestListSubjectDao extends Dao{
 
 	//複数行にわたるSQLの結果をリストに格納するためのメソッド
-	private List<TestListSubject> postFilter(ResultSet rSet) throws Exception{
+	private ArrayList<TestListSubject> postFilter(ResultSet rSet) throws Exception{
 		//リストを初期化
-		List<TestListSubject> list = new ArrayList<>();
+		ArrayList<TestListSubject> list = new ArrayList<>();
 		try{
 			//リザルトセットを全権走査
 			while(rSet.next()){
@@ -43,7 +43,7 @@ public class TestListSubjectDao extends Dao{
 	//
 	public List<TestListSubject> filter(int entYear,String classNum,Subject subject,School school) throws Exception{
 		//リストを初期化
-		List<TestListSubject> list = new ArrayList<>();
+		ArrayList<TestListSubject> list = new ArrayList<>();
 		//コネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント

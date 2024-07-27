@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import bean.Student;//学生情報を格納するDao
 import bean.TestListStudent;
@@ -13,9 +12,9 @@ import bean.TestListStudent;
 public class TestListStudentDao extends Dao{
 
 	//複数行にわたるSQLの結果をリストに格納するためのメソッド
-	private List<TestListStudent> postFilter(ResultSet rSet) throws Exception{
+	private ArrayList<TestListStudent> postFilter(ResultSet rSet) throws Exception{
 		//リストを初期化
-		List<TestListStudent> list = new ArrayList<>();
+		ArrayList<TestListStudent> list = new ArrayList<>();
 		try{
 			//リザルトセットを全権走査
 			while(rSet.next()){
@@ -35,9 +34,9 @@ public class TestListStudentDao extends Dao{
 	}
 
 
-	public List<TestListStudent> filter(Student student) throws Exception{
+	public ArrayList<TestListStudent> filter(Student student) throws Exception{
 		//リストを初期化
-		List<TestListStudent> list = new ArrayList<>();
+		ArrayList<TestListStudent> list = new ArrayList<>();
 		//コネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント
