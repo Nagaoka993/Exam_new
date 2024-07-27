@@ -1,41 +1,41 @@
-<%--科目一覧JSP --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="../common/base.jsp">
-	<c:param name="title">
-		得点管理システム
-	</c:param>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
+<% List<String> entYearList = (List<String>) request.getAttribute("ent_year_list"); %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>学生成績参照</title>
+</head>
+<body>
+    <h1>学生成績参照</h1>
 
-	<c:param name="scripts"></c:param>
+    <h2>科目情報で検索</h2>
+    <form action="TestListSubjectExecuteAction.do" method="post">
+        <label for="ent_year">入学年度:</label>
+        <select id="ent_year" name="ent_year">
+            <option>-- 選択してください --</option>
+   			<c:forEach var="ent_year" items="${ent_year_list} ">
+			<option><c:out value="${ent_year}" /></option>
+   			</c:forEach>
 
-	<c:param name="content">
-	<%@page import="bean.Subject, java.util.List" %>
-		<section class=mp-4>
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
-			<div class="my-2 text-end px-4">
-				<a href="../scoremanager.main/SubjectCreate.action">新規登録</a>
-			</div>
-    	<h1>学生成績参照</h1>
-    		<h2>科目情報で検索</h2>
-    			<form action="TestListAction.do" method="post"> <%-- Actionクラスへのパスを設定 --%>
-        			<label for="ent_year">入学年度:</label>
-        			<input type="text" id="ent_year" name="ent_year"><br>
-        			<label for="class_num">クラス:</label>
-        			<input type="text" id="class_num" name="class_num"><br>
-        			<label for="subject_name">科目:</label>
-        			<input type="text" id="subject_name" name="subject_name"><br><br>
-        			<input type="submit" value="検索">
-   				 </form>
+        </select><br>
 
-    			<h2>学生番号で検索</h2>
-    				<form action="TestListAction.do" method="post"> <%-- Actionクラスへのパスを設定 --%>
-        				<label for="student_num">学生番号:</label>
-        				<input type="text" id="student_num" name="student_num"><br><br>
-        				<input type="submit" value="検索">
-    				</form>
-				</body>
-			</html>
-		</section>
-	</c:param>
-</c:import>
+        <label for="subject_name">科目:</label>
+        <select id="subject_name" name="subject_name">
+            <option value="">-- 選択してください --</option>
+            %>
+        </select><br><br>
+
+        <input type="submit" value="検索">
+    </form>
+
+    <h2>学生番号で検索</h2>
+    <form action="TestListSubjectExecuteAction.do" method="post">
+        <label for="student_num">学生番号:</label>
+        <input type="text" id="student_num" name="student_num"><br><br>
+        <input type="submit" value="検索">
+    </form>
+</body>
+</html>
