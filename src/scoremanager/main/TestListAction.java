@@ -33,7 +33,7 @@ public class TestListAction extends Action{
 		classnum_list = classnumDao.filter(teacher.getSchool());
 
 		//デバッグ用,必要に応じてコメントアウトから外す
-		//System.out.println(ent_year_list);
+		System.out.println(ent_year_list);
 		//System.out.println(subjectname_list);
 		//System.out.println(classnum_list);
 

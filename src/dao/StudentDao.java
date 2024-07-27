@@ -329,7 +329,7 @@ public class StudentDao extends Dao{
 		try {
 			//プリペアードステートメントにselect文を設置
 			statement = connection
-					.prepareStatement("select ent_year from student where school_cd=?");
+					.prepareStatement("select distinct ent_year from student where school_cd=?");
 				//プリペアードステートメントに値をバインド
 			statement.setString(1,teacher.getSchool_cd());
 			//プライベートステートメントを実行
