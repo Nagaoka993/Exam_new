@@ -29,8 +29,8 @@ public class TestListAction extends Action{
 
 		//プルダウン用にリストを取得*SQLはDaoで実行
 		ent_year_list = studentDao.getEntYearList(teacher);
-		subjectname_list = subjectDao.getClassNumList(teacher);
-		classnum_list = classnumDao.getClassNumList(teacher);
+		subjectname_list = subjectDao.getSubjectNameList(teacher);
+		classnum_list = classnumDao.filter(teacher.getSchool());
 
 		//デバッグ用,必要に応じてコメントアウトから外す
 		//System.out.println(ent_year_list);

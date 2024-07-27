@@ -289,4 +289,47 @@ public class SubjectDao extends Dao{
 			return false;
 		}
 	}
+	//teacherの所属している学校の科目名一覧を取得するメソッドを追記*testlistactionで使用
+	public List<String> getSubjectNameList(Teacher teacher)throws Exception{
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		//リザルトセット
+		ResultSet rSet = null;
+		List<String> list = new ArrayList<>();
+		try {
+			//プリペアードステートメントにselect文を設置
+			statement = connection
+					.prepareStatement("select name from subject where school_cd=?");
+				//プリペアードステートメントに値をバインド
+			statement.setString(1,teacher.getSchool_cd());
+			//プライベートステートメントを実行
+			rSet = statement.executeQuery();
+			//結果をリストに格納する
+			while(rSet.next()){
+				list.add(rSet.getString("subject"));
+			}
+		}catch(Exception e){
+			throw e;
+		}finally{
+			//プリペアードステートメントを閉じる
+			if(statement != null){
+				try{
+					statement.close();
+				}catch(SQLException sqle){
+					throw sqle;
+				}
+			}
+			//コネクションを閉じる
+			if(connection != null){
+				try{
+					connection.close();
+				}catch (SQLException sqle){
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
 }
