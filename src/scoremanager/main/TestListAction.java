@@ -5,51 +5,43 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import bean.Student;
-import bean.TestListStudent;
+import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
-import dao.TestListStudentDao;
+import dao.SubjectDao;
 import tool.Action;
 
 public class TestListAction extends Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		HttpSession session = req.getSession();//セッション
+		Teacher teacher = (Teacher)session.getAttribute("user");	//ログインユーザーを取得
+		//Daoの初期化
+		SubjectDao subjectDao = new SubjectDao();
+		StudentDao studentDao = new StudentDao();
+		ClassNumDao classnumDao = new ClassNumDao();
+		//リストの初期化
+		List<String> ent_year_list = new ArrayList<String>();
+		List<String> subjectname_list = new ArrayList<String>();
+		List<String> classnum_list = new ArrayList<String>();
 
-		String ent_year_str = req.getParameter("ent_year");
-		String class_num = req.getParameter("class_num");
-		String subject_name = req.getParameter("subject_name");
+		//プルダウン用にリストを取得*SQLはDaoで実行
+		ent_year_list = studentDao.getEntYearList(teacher);
+		subjectname_list = subjectDao.getSubjectNameList(teacher);
+		classnum_list = classnumDao.filter(teacher.getSchool());
 
-		String student_num = req.getParameter("student_num");
+		//デバッグ用,必要に応じてコメントアウトから外す
+		System.out.println(ent_year_list);
+		//System.out.println(subjectname_list);
+		//System.out.println(classnum_list);
 
-		//科目情報で検索されたときの処理
-		if(ent_year_str!= null && class_num!=null && subject_name!=null){
+		//リストを遷移先を渡す
+		req.setAttribute("ent_year_list",ent_year_list);
+		req.setAttribute("subjectname_list",subjectname_list);
+		req.setAttribute("classnum_list", classnum_list);
 
-
-			req.setAttribute();
-			//科目別成績一覧表示する
-			return "../studentmanager/test_list_subject.jsp";
-		}
-		//学生番号で検索された時の処理
-		if(student_num != null){
-			//Daoを初期化
-			StudentDao studentDao =  new StudentDao();
-			//学生番号に対応するStudentBeanを取得
-			Student student = new Student();
-			student = studentDao.get(student_num);
-			//リストを初期化
-			List<TestListStudent> list = new ArrayList<>();
-			//Daoを初期化
-			TestListStudentDao testliststudentDao = new TestListStudentDao();
-			//studentbeanを渡し、一覧で表示させたい情報をList<TestListStudent>インスタンスに格納する
-			list = testliststudentDao.filter(student);
-
-			//一覧ページで表示させたい情報をセッションに渡す
-			req.setAttribute("student", student);
-			req.setAttribute("student_list",list);
-
-			//学生別成績一覧表示する;
-			return "../studentmanager/test_list_student.jsp";
-		}
+	return "../studentmanager/test_list.jsp";
 	}
 }

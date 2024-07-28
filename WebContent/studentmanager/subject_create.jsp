@@ -7,35 +7,36 @@
 		得点管理システム
 	</c:param>
 	<c:param name="content">
-	<section class="mp-4">
-	<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報登録</h2>
-	<form action="SubjectCreateExecute.action" method="post">
-	<p>科目コード<br><input type="text" name="cd" value="" id="subject_cd"
-	placeholder="科目コードを入力してください" size="95" maxlength="3" required></p>
-	<p>科目名<br><input type="text" name="name" value="" id="subject_name"
-	placeholder="科目名を入力してください" size="95" maxlength="20" required></p>
+		<section class="mp-4">
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報登録</h2>
 
-	<input type="button" onclick="location.href='href'../studentmanager/subject_create_done.jsp"
-	value="登録" name="create_btn">
-	<a href="../scoremanager.main/Subjectlist.action">戻る</a>
+			<%-- パラメーターdoneが存在する場合 --%>
+			<c:if test="${!empty done}">
+				<div class="bg-success bg-opacity-50 text-center lh-lg">
+					<p>${done}</p>
+				</div>
+			</c:if>
+			<form action="../scoremanager.main/SubjectCreateExecute.action" method="post">
+				<div class="mx-3 py-2">
+					<div class="my-3">
+						<label class="form-label" for="subject-cd-input">科目コード</label>
+						<input type="text" class="form-control" id="subject-cd-input" name="cd"
+						placeholder="科目コードを入力してください" size="95" maxlength="3" value="${cd}" required>
+						<div class="mt-2 text-warning">${errors.get("cd")}</div>
+					</div>
+					<div class="my-3">
+						<label class="form-label" for="subject-cd-input">科目名</label>
+						<input type="text" class="form-control" id="subject-name-input" name="name"
+						placeholder="科目名を入力してください" size="95" maxlength="20" value="${name}" required>
+						<div class="mt-2 text-warning">${errors.get("name")}</div>
+					</div>
+						<input type="submit" value="登録" name="create_btn">
+				</div>
+			</form>
+				<div>
+						<a href="../scoremanager.main/Subjectlist.action">戻る</a>
+				</div>
 
-	<%--
-	<p><input type="button" value="Check" id="checkButton"></p>
-
-	<p id="msg"></p>
-
-	<script>
-	function butotnClick(){
-	  msg.innerText = 'お名前は' + nameText.value + 'さんですね';
-	}
-
-	let nameText = document.getElementById('nameText');
-	let msg = document.getElementById('msg');
-
-	let checkButton = document.getElementById('checkButton');
-	checkButton.addEventListener('click', butotnClick);
-	</script>
-	--%>
-
+		</section>
 	</c:param>
 </c:import>

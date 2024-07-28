@@ -9,6 +9,7 @@ import java.util.List;
 
 import bean.School;
 import bean.Student;
+import bean.Teacher;
 
 public class StudentDao extends Dao{
 
@@ -315,5 +316,48 @@ public class StudentDao extends Dao{
 		}else{
 			return false;
 		}
+	}
+	//与えた教員インスタンスの所属する生徒の入学年度の一覧を返す
+	public ArrayList<String> getEntYearList(Teacher teacher)throws Exception{
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		//リザルトセット
+		ResultSet rSet = null;
+		ArrayList<String> list = new ArrayList<>();
+		try {
+			//プリペアードステートメントにselect文を設置
+			statement = connection
+					.prepareStatement("select distinct ent_year from student where school_cd=?");
+				//プリペアードステートメントに値をバインド
+			statement.setString(1,teacher.getSchool_cd());
+			//プライベートステートメントを実行
+			rSet = statement.executeQuery();
+			//結果をリストに格納する
+			while(rSet.next()){
+				list.add(rSet.getString("ent_year"));
+			}
+		}catch(Exception e){
+			throw e;
+		}finally{
+			//プリペアードステートメントを閉じる
+			if(statement != null){
+				try{
+					statement.close();
+				}catch(SQLException sqle){
+					throw sqle;
+				}
+			}
+			//コネクションを閉じる
+			if(connection != null){
+				try{
+					connection.close();
+				}catch (SQLException sqle){
+					throw sqle;
+				}
+			}
+		}
+		return list;
 	}
 }
