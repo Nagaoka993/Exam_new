@@ -6,7 +6,7 @@
 <% ArrayList<String> subjectname_list = (ArrayList<String>) request.getAttribute("subjectname_list"); %>
 <% ArrayList<Test> Test_list = (ArrayList<Test>) session.getAttribute("Test_list"); %>
 <c:import url="/common/base.jsp">
-    <c:param name="title">成績管理</c:param>
+    <c:param name="title">成績管理☆</c:param>
     <c:param name="content">
     <form action="TestRegistExecute.action" method="post">
         <label for="ent_year">入学年度:</label>
