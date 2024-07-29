@@ -16,44 +16,24 @@ public class TestRegistUpdateExecuteAction extends Action{
 	public String execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザーを取得
-		ArrayList<Test> Test_list = (ArrayList<Test>)req.getAttribute("Test_list");
+		ArrayList<Test> Test_list = (ArrayList<Test>)session.getAttribute("Test_list");
 	    //  全ての点数入力値を取得
-	    String[] pointValues = req.getParameterValues("point");
+	    String[] pointOldSet = req.getParameterValues("point_old_set[]");
+	    String[] pointNewSet = req.getParameterValues("point_new_set[]");
 	    String[] studentNoSet = req.getParameterValues("student_no_set[]");
 	    String[] subjectCdSet = req.getParameterValues("subject_cd_set[]");
 	    String[] NoSet = req.getParameterValues("no_set[]");
 
-        // 点数リストを取得
-        ArrayList<Integer> oldPointList = new ArrayList<>();
-        ArrayList<Integer> newPointList = new ArrayList<>();
-
-        int count = 0; // カウント変数を初期化
-        while (true) {
-            String oldPointParamName = "point_old_" + count;
-            String newPointParamName = "point_new_" + count;
-
-            String oldPointStr = req.getParameter(oldPointParamName);
-            String newPointStr = req.getParameter(newPointParamName);
-
-            // パラメータが見つからない場合はループを抜ける
-            if (oldPointStr == null || newPointStr == null) {
-                break;
-            }
-
-            // 数値に変換してリストに追加
-            oldPointList.add(Integer.parseInt(oldPointStr));
-            newPointList.add(Integer.parseInt(newPointStr));
-
-            count++; // カウントをインクリメント
-        }
 
 
 	    //Daoを初期化
 	    TestDao testDao = new TestDao();
 	    boolean isUpdate = false;
 	    for(int i=0;i<Test_list.size();i++){
-	    	if(oldPointList.get(i)!=newPointList.get(i)){
-            	isUpdate = testDao.update(studentNoSet[i],subjectCdSet[i],Integer.parseInt(NoSet[i]),newPointList.get(i));
+
+
+	    	if(Integer.parseInt(pointOldSet[i])!= Integer.parseInt((pointNewSet[i]))){
+            	isUpdate = testDao.update(studentNoSet[i],subjectCdSet[i],Integer.parseInt(NoSet[i]),Integer.parseInt(pointNewSet[i]));
 	    	}
 	    }
 	    if(isUpdate){

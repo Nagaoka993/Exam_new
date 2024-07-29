@@ -4,8 +4,7 @@
 <% ArrayList<String> ent_year_list = (ArrayList<String>) request.getAttribute("ent_year_list"); %>
 <% ArrayList<String> classnum_list = (ArrayList<String>) request.getAttribute("classnum_list"); %>
 <% ArrayList<String> subjectname_list = (ArrayList<String>) request.getAttribute("subjectname_list"); %>
-<% ArrayList<Test> Test_list = (ArrayList<Test>) request.getAttribute("Test_list"); %>
-<% request.setAttribute("Test_list",Test_list); %>
+<% ArrayList<Test> Test_list = (ArrayList<Test>) session.getAttribute("Test_list"); %>
 <c:import url="/common/base.jsp">
     <c:param name="title">成績管理</c:param>
     <c:param name="content">
@@ -67,10 +66,10 @@
 				<th><%= i.getStudent().getNo() %></th>
 				<th><%= i.getStudent().getName() %></th>
 				    <input type="hidden"
-				           name="point_old_<%=count %>"
+				           name="point_old_set[]"
 				           value="<%= i.getPoint() %>" /><%-- 変更前の点数をhiddenで保持 --%>
 				<th>
-					<input  name="point_new_<%=count %>" value="<%= i.getPoint() %>"/>
+					<input  name="point_new_set[]" value="<%= i.getPoint() %>"/>
 				</th>
 				<tr>
 					<input type="hidden" name="student_no_set[]" value=<%= i.getStudent().getNo() %>>
@@ -78,6 +77,7 @@
 					<input type="hidden" name="no_set[]" value=<%= i.getNo() %>>
 			<% } %>
 		</table>
+
     <input class="btn btn-primary" type="submit" value="登録して終了">
     </form>
     </c:param>

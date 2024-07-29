@@ -28,7 +28,7 @@ public class TestRegistExecuteAction extends Action{
 		int ent_year = Integer.parseInt(ent_year_str);
 		String class_num = req.getParameter("class_num");
 		String subject_name = req.getParameter("subject_name");
-		
+
 
 		int times = Integer.parseInt(req.getParameter("times"));//テストの回数を取得
 		//リストを初期化
@@ -62,7 +62,7 @@ public class TestRegistExecuteAction extends Action{
 		req.setAttribute("ent_year_list",ent_year_list);
 		req.setAttribute("subjectname_list",subjectname_list);
 		req.setAttribute("classnum_list", classnum_list);
-		req.setAttribute("Test_list", list);
+		session.setAttribute("Test_list", list);
 		//デバッグ用
 		System.out.println(list);
 
