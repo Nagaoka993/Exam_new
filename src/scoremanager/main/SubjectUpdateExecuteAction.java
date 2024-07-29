@@ -59,7 +59,7 @@ public class SubjectUpdateExecuteAction extends Action {
 			return "../studentmanager/subject_update.jsp";
 		}
 
-		return "../studentmanager/subject_update_comp.jsp";
+		return "../studentmanager/subject_update_done.jsp";
 	}
 
 }
