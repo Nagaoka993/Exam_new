@@ -250,16 +250,11 @@ public class SubjectDao extends Dao{
 		int count = 0;
 
 		try {
-			//subjectテーブルから科目を取得
-			Subject old = get(subject.getCd(), subject.getSchool());
-			if (old == null) {
-				//プリペアードステートメントにDELETE文をセット
-				statement = connection.prepareStatement(
-						"delete from subject where cd  = ?");
-				//プリペアードステートメントに値をバインド
-				statement.setString(1, subject.getCd());
-				statement.setString(2, subject.getName());
-			}
+			//プリペアードステートメントにDELETE文をセット
+			statement = connection.prepareStatement(
+					"delete from subject where cd  = ?");
+			//プリペアードステートメントに値をバインド
+			statement.setString(1, subject.getCd());
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
 		} catch (Exception e) {
