@@ -54,22 +54,23 @@ public class TestListSubjectDao extends Dao{
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(
 					//テストテーブルの結果に科目cdを付け足す
-					"SELECT"
-					 +"s.ent_year,s.class_num,s.no,s.name,"
-					 +"MAX(CASE WHEN t.NO = 1 THEN t.POINT ELSE NULL END) AS 1回目"
-					 +"MAX(CASE WHEN t.NO = 2 THEN t.POINT ELSE NULL END) AS 2回目"
+					"SELECT s.ent_year,s.class_num,s.no,s.name,"
+					 +"MAX(CASE WHEN t.NO = 1 THEN t.POINT ELSE NULL END) AS test1,"
+					 +"MAX(CASE WHEN t.NO = 2 THEN t.POINT ELSE NULL END) AS test2 "
 					 +"FROM test t"
-					 +"join"
-					 +"student s on t.student_no = s.NO"//学生番号を条件に結合する
-					 +"where"//取得したい行を絞り込む
-					 +"s.ent_year = ? and t.class_num=? t.subject_cd = ?"
-					 +"t.school_cd=?"
-					 +"GROUP BY"//学生番号と科目コードの一致する行を結合する
-					 +"t.STUDENT_NO,"
-					 +"t.SUBJECT_CD"
-					 +"ORDER BY"
-					 +"t.STUDENT_NO,"
-					 +"t.SUBJECT_CD");
+					 +" join"
+					 +" student s on t.student_no = s.NO"//学生番号を条件に結合する
+					 +" where"//取得したい行を絞り込む
+					 +" s.ent_year = ? "
+					 +" and t.class_num = ?"
+					 +" and t.subject_cd = ?"
+					 +" and t.school_cd= ?"
+					 +" GROUP BY"//学生番号と科目コードの一致する行を結合する
+					 +" t.STUDENT_NO,"
+					 +" t.SUBJECT_CD"
+					 +" ORDER BY"
+					 +" t.STUDENT_NO,"
+					 +" t.SUBJECT_CD");
 			//プリペアードステートメントにバインド
 			statement.setInt(1,entYear);//入学年度
 			statement.setString(2,classNum);//クラス番号
