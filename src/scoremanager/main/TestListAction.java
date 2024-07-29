@@ -38,9 +38,9 @@ public class TestListAction extends Action{
 		//System.out.println(classnum_list);
 
 		//リストを遷移先を渡す
-		req.setAttribute("ent_year_list",ent_year_list);
-		req.setAttribute("subjectname_list",subjectname_list);
-		req.setAttribute("classnum_list", classnum_list);
+		session.setAttribute("ent_year_list",ent_year_list);
+		session.setAttribute("subjectname_list",subjectname_list);
+		session.setAttribute("classnum_list", classnum_list);
 
 	return "../studentmanager/test_list.jsp";
 	}

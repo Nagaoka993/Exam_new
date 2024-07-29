@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList" %>
-<% ArrayList<String> ent_year_list = (ArrayList<String>) request.getAttribute("ent_year_list"); %>
-<% ArrayList<String> classnum_list = (ArrayList<String>) request.getAttribute("classnum_list"); %>
-<% ArrayList<String> subjectname_list = (ArrayList<String>) request.getAttribute("subjectname_list"); %>
+<% ArrayList<String> ent_year_list = (ArrayList<String>) session.getAttribute("ent_year_list"); %>
+<% ArrayList<String> classnum_list = (ArrayList<String>) session.getAttribute("classnum_list"); %>
+<% ArrayList<String> subjectname_list = (ArrayList<String>) session.getAttribute("subjectname_list"); %>
 <c:import url="../common/base.jsp">
 	<c:param name="title">
 		得点管理システム
