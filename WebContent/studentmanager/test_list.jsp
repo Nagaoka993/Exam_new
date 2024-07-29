@@ -6,7 +6,7 @@
 <% ArrayList<String> subjectname_list = (ArrayList<String>) session.getAttribute("subjectname_list"); %>
 <c:import url="../common/base.jsp">
 	<c:param name="title">
-		得点管理システム
+		得点管理システム☆
 	</c:param>
 
 	<c:param name="scripts"></c:param>
@@ -81,7 +81,7 @@
 					</table>
 					</div>
 				</div>
-				<font size="2" style="color: blue;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</font>
+				<font size="2" style="color: b"WebContent/studentmanager/test_list.jsp"lue;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</font>
 		</section>
 	</c:param>
 </c:import>
