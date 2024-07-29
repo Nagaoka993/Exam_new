@@ -30,8 +30,7 @@ public class TestListSubjectDao extends Dao{
 				testlistsubject.setStudentNo(rSet.getString(""));
 				testlistsubject.setStudentName(rSet.getString(""));
 				//1回目のポイントと2回目のポイントを格納するディクショナリー
-				Map<Integer, Integer> points = new HashMap<>(rSet.getInt("1回目"),rSet.getInt("2回目"));
-				testlistsubject.setPoints(points);
+				testlistsubject.setPoints(rSet.getInt("test1"),rSet.getInt("test2"));
 				list.add(testlistsubject);
 			}
 		}catch(SQLException | NullPointerException e){
