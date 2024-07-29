@@ -13,7 +13,7 @@ import dao.StudentDao;
 import dao.SubjectDao;
 import tool.Action;
 
-public class TestListAction extends Action{
+public class TestRegistAction extends Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession();//セッション
@@ -42,6 +42,6 @@ public class TestListAction extends Action{
 		req.setAttribute("subjectname_list",subjectname_list);
 		req.setAttribute("classnum_list", classnum_list);
 
-	return "../studentmanager/test_list.jsp";
+	return "../studentmanager/test_regist_search.jsp";
 	}
 }
