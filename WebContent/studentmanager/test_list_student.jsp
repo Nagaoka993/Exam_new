@@ -1,9 +1,13 @@
+<%@page import="bean.TestListStudent"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.ArrayList" %>
-<% ArrayList<String> ent_year_list = (ArrayList<String>) request.getAttribute("ent_year_list"); %>
-<% ArrayList<String> classnum_list = (ArrayList<String>) request.getAttribute("classnum_list"); %>
-<% ArrayList<String> subjectname_list = (ArrayList<String>) request.getAttribute("subjectname_list"); %>
+<%@ page import="java.util.ArrayList, java.util.List, bean.TestListSubject" %>
+
+<% ArrayList<String> ent_year_list = (ArrayList<String>) session.getAttribute("ent_year_list"); %>
+<% ArrayList<String> classnum_list = (ArrayList<String>) session.getAttribute("classnum_list"); %>
+<% ArrayList<String> subjectname_list = (ArrayList<String>) session.getAttribute("subjectname_list"); %>
+<% List<TestListSubject> test_list_subjectlist = (List<TestListSubject>)session.getAttribute("list");%>
+<% List<TestListStudent> test_list_studentlist = (List<TestListStudent>)session.getAttribute("student_list, student");%>
 <c:import url="../common/base.jsp">
 	<c:param name="title">
 		得点管理システム
@@ -14,7 +18,7 @@
 	<c:param name="content">
 	<%@page import="bean.Subject, java.util.List" %>
 		<section class=mp-4>
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目管理</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧(学生)</h2>
 			<div class="my-2 text-end px-4">
 				<a href="../scoremanager.main/SubjectCreate.action">新規登録</a>
 			</div>
@@ -41,7 +45,7 @@
 						<label class="form-label" for=subject-f1-select></label>
 						<table style="width: 100%; ">
 						<form action="../scoremanager.main/TestListSubjectExecute.action"method="post">
-						<tr >
+						<tr>
 							<th style="width: 70px;">科目情報</th>
 
 							<td style="width: 70px;">入学年度
@@ -72,23 +76,26 @@
 						<tr>
 							<th>学生情報</th>
 							<td>学生番号
-							<div>
+							<div></div>
 							<form action="../scoremanager.main/TestListSubjectExecute.action" method="post">
-							<input class="student_num" type="text"name="student_num" required minlength="7" size="20" placeholder="学生番号を入力してください"></td>
-							<td><input class="btn btn-primary" type="submit"value="検索"></td>
+								<input class="student_num" type="text"name="student_num" required minlength="7" size="20" placeholder="学生番号を入力してください"></td>
+								<td><input class="btn btn-primary" type="submit"value="検索"></td>
 							</form>
 						</tr>
-					</table>
-					</div>
-				</div>
-				<table style="width: 100%;">
-						<c:forEach var="subject" items="${subject}">
+						</table>
+						</div>
+					<label class="form-label" for=subject-f1-select></label>
+					<table style="width: 100%;">
+						<c:forEach var="obj" items="${test_list_studentlist}" >
 						<tr>
-							<td>${subject.cd}</td>
-							<td>${subject.name}</td>
+							<td>${obj.subjectName}</td>
+							<td>${obj.subjectCd}</td>
+							<td>${obj.num}</td>
+							<td>${obj.point}</td>
 						</tr>
 						</c:forEach>
-				</table>
+					</table>
+				</div>
 		</section>
 	</c:param>
 </c:import>
