@@ -24,7 +24,6 @@ public class SubjectDeleteAction extends Action {
 
 		//リクエストパラメーターの取得 2
 		String cd = req.getParameter("cd"); 	//科目コード
-		System.out.println(cd);
 
 		//DBからデータを取得 3
 		Subject subject = sDao.get(cd, school);	//科目コードから科目インスタンスを取得
