@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.TestDao;
-import dao.SubjectDao;
-import dao.StudentDao;
-import dao.ClassNumDao;
 import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
+import dao.ClassNumDao;
+import dao.StudentDao;
+import dao.SubjectDao;
+import dao.TestDao;
 import tool.Action;
 
 
@@ -62,7 +62,7 @@ public class TestRegistExecuteAction extends Action{
 		req.setAttribute("ent_year_list",ent_year_list);
 		req.setAttribute("subjectname_list",subjectname_list);
 		req.setAttribute("classnum_list", classnum_list);
-		session.setAttribute("Test_list", list);
+		req.setAttribute("Test_list", list);
 		//デバッグ用
 		System.out.println(list);
 

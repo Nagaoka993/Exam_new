@@ -44,8 +44,8 @@
 						<label class="form-label" for=subject-f1-select></label>
 						<table style="width: 100%; ">
 						<form action="../scoremanager.main/TestListSubjectExecute.action"method="post">
-						<tr >
-							<th style="width: 70px;">科目情報</th>
+						<tr>
+							<th style="width: 70px;">科目情報(科目別)</th>
 
 							<td style="width: 70px;">入学年度
 							<div></div>
@@ -75,10 +75,10 @@
 						<tr>
 							<th>学生情報</th>
 							<td>学生番号
-							<div>
+							<div></div>
 							<form action="../scoremanager.main/TestListSubjectExecute.action" method="post">
-							<input class="student_num" type="text"name="student_num" required minlength="7" size="20" placeholder="学生番号を入力してください"></td>
-							<td><input class="btn btn-primary" type="submit"value="検索"></td>
+								<input class="student_num" type="text"name="student_num" required minlength="7" size="20" placeholder="学生番号を入力してください"></td>
+								<td><input class="btn btn-primary" type="submit"value="検索"></td>
 							</form>
 						</tr>
 					</table>
@@ -88,11 +88,12 @@
 					<table style="width: 100%;">
 					<%for(TestListSubject object : test_list_subjectlist){ %>
 						<tr>
+							<%=System.out.println(object.getEntYear()); %>
 							<td><%=object.getEntYear()%></td>
 							<td><%=object.getClassNum()%></td>
 							<td><%=object.getStudentNo()%></td>
 							<td><%=object.getStudentName()%></td>
-							<% List<Integer> points = object.getPoints(); %>
+							<% List<Integer> points = object.getPoints();%>
 							<td><%= points.get(0) %></td> <%-- 1回目の得点 --%>
 							<td><%= points.get(1) %></td> <%-- 2回目の得点 --%>
 						</tr>

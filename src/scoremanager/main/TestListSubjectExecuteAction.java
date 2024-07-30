@@ -48,7 +48,7 @@ public class TestListSubjectExecuteAction extends Action{
 			list = testlistsubjectDao.filter(ent_year,class_num, subject, teacher.getSchool());
 
 			//リストをセッションに渡す
-			req.setAttribute("list",list);
+			session.setAttribute("list",list);
 			//科目別成績一覧表示する
 			return "../studentmanager/test_list_subject.jsp";
 		}
@@ -71,7 +71,7 @@ public class TestListSubjectExecuteAction extends Action{
 			req.setAttribute("student", student);
 			req.setAttribute("student_list",list);
 
-			//学生別成績一覧表示する;	
+			//学生別成績一覧表示する;
 			return "../studentmanager/test_list_student.jsp";
 		}
 
