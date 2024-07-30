@@ -71,7 +71,7 @@ public class TestListSubjectExecuteAction extends Action{
 			req.setAttribute("student", student);
 			req.setAttribute("student_list",list);
 
-			//学生別成績一覧表示する;
+			//学生別成績一覧表示する;	
 			return "../studentmanager/test_list_student.jsp";
 		}
 

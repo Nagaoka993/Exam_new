@@ -1,9 +1,12 @@
+<%@page import="com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.ArrayList" %>
-<% ArrayList<String> ent_year_list = (ArrayList<String>) request.getAttribute("ent_year_list"); %>
-<% ArrayList<String> classnum_list = (ArrayList<String>) request.getAttribute("classnum_list"); %>
-<% ArrayList<String> subjectname_list = (ArrayList<String>) request.getAttribute("subjectname_list"); %>
+<%@ page import="java.util.ArrayList, java.util.List, bean.TestListSubject" %>
+
+<% ArrayList<String> ent_year_list = (ArrayList<String>) session.getAttribute("ent_year_list"); %>
+<% ArrayList<String> classnum_list = (ArrayList<String>) session.getAttribute("classnum_list"); %>
+<% ArrayList<String> subjectname_list = (ArrayList<String>) session.getAttribute("subjectname_list"); %>
+<% List<TestListSubject> test_list_subjectlist = (List<TestListSubject>)session.getAttribute("list");%>
 <c:import url="../common/base.jsp">
 	<c:param name="title">
 		得点管理システム
@@ -53,14 +56,14 @@
 
 							<td style="width: 5px;">クラス
 							<div></div>
-							 <select id="calssnum" name="classnum">
+							 <select id="calssnum" name="class_num">
 							<option>-------------</option>
 							<% for(int i = 0; i < classnum_list.size(); i++) { %><option>
 							<%= classnum_list.get(i)%></option><% } %></select></td>
 
 							<td style="width: 5px;">科目
 							<div></div>
-							 <select id="subjectname" name="subjectname">
+							 <select id="subjectname" name="subject_name">
 							<option>-------------</option>
 							<% for(int i = 0; i < subjectname_list.size(); i++) { %><option>
 							<%= subjectname_list.get(i)%></option><% } %></select></td>
@@ -74,13 +77,27 @@
 							<td>学生番号
 							<div>
 							<form action="../scoremanager.main/TestListSubjectExecute.action" method="post">
-							<input type="text" name="student_num" required minlength="7" vakue="${student_num}" size="20" placeholder="学生番号を入力してください"></td>
+							<input class="student_num" type="text"name="student_num" required minlength="7" size="20" placeholder="学生番号を入力してください"></td>
 							<td><input class="btn btn-primary" type="submit"value="検索"></td>
 							</form>
 						</tr>
 					</table>
 					</div>
 				</div>
+					<label class="form-label" for=subject-f1-select></label>
+					<table style="width: 100%;">
+					<%for(TestListSubject object : test_list_subjectlist){ %>
+						<tr>
+							<td><%=object.getEntYear()%></td>
+							<td><%=object.getClassNum()%></td>
+							<td><%=object.getStudentNo()%></td>
+							<td><%=object.getStudentName()%></td>
+							<% List<Integer> points = object.getPoints(); %>
+							<td><%= points.get(0) %></td> <%-- 1回目の得点 --%>
+							<td><%= points.get(1) %></td> <%-- 2回目の得点 --%>
+						</tr>
+					<%} %>
+					</table>
 		</section>
 	</c:param>
 </c:import>

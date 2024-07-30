@@ -44,7 +44,7 @@
 						<tr >
 							<th style="width: 70px;">科目情報</th>
 
-							<td style="width: 10px;">入学年度
+							<td style="width: 70px;">入学年度
 							<div></div>
 							 <select id="ent_year" name="ent_year">
 							<option>-------------</option>
@@ -53,14 +53,14 @@
 
 							<td style="width: 5px;">クラス
 							<div></div>
-							 <select id="calssnum" name="classnum">
+							 <select id="calssnum" name="class_num">
 							<option>-------------</option>
 							<% for(int i = 0; i < classnum_list.size(); i++) { %><option>
 							<%= classnum_list.get(i)%></option><% } %></select></td>
 
 							<td style="width: 5px;">科目
 							<div></div>
-							 <select id="subjectname" name="subjectname">
+							 <select id="subjectname" name="subject_name">
 							<option>-------------</option>
 							<% for(int i = 0; i < subjectname_list.size(); i++) { %><option>
 							<%= subjectname_list.get(i)%></option><% } %></select></td>
@@ -73,22 +73,22 @@
 							<th>学生情報</th>
 							<td>学生番号
 							<div>
-							<input type="text" name="student_no" required minlength="15" size="20" placeholder="学生番号を入力してください"></td>
 							<form action="../scoremanager.main/TestListSubjectExecute.action" method="post">
+							<input class="student_num" type="text"name="student_num" required minlength="7" size="20" placeholder="学生番号を入力してください"></td>
 							<td><input class="btn btn-primary" type="submit"value="検索"></td>
 							</form>
 						</tr>
 					</table>
 					</div>
 				</div>
-					<c:forEach var="subject" items="${subject}">
+				<table style="width: 100%;">
+						<c:forEach var="subject" items="${subject}">
 						<tr>
 							<td>${subject.cd}</td>
 							<td>${subject.name}</td>
-							<td></td>
-							<td></td>
 						</tr>
-					</c:forEach>
+						</c:forEach>
+				</table>
 		</section>
 	</c:param>
 </c:import>
