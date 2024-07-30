@@ -6,8 +6,7 @@
 <% ArrayList<String> ent_year_list = (ArrayList<String>) session.getAttribute("ent_year_list"); %>
 <% ArrayList<String> classnum_list = (ArrayList<String>) session.getAttribute("classnum_list"); %>
 <% ArrayList<String> subjectname_list = (ArrayList<String>) session.getAttribute("subjectname_list"); %>
-<% List<TestListSubject> test_list_subjectlist = (List<TestListSubject>)session.getAttribute("list");%>
-<% List<TestListStudent> test_list_studentlist = (List<TestListStudent>)session.getAttribute("student_list, student");%>
+<% ArrayList<TestListStudent> test_list_studentlist = (ArrayList<TestListStudent>)request.getAttribute("student_list");%>
 <c:import url="../common/base.jsp">
 	<c:param name="title">
 		得点管理システム
@@ -88,8 +87,8 @@
 					<table style="width: 100%;">
 						<c:forEach var="obj" items="${test_list_studentlist}" >
 						<tr>
-							<td>${obj.subjectName}</td>
-							<td>${obj.subjectCd}</td>
+							<td>${obj.studentName}</td>
+							<td>${obj.studentCd}</td>
 							<td>${obj.num}</td>
 							<td>${obj.point}</td>
 						</tr>
