@@ -1,4 +1,3 @@
-<%@page import="com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList, java.util.List, bean.TestListSubject" %>
@@ -81,24 +80,23 @@
 								<td><input class="btn btn-primary" type="submit"value="検索"></td>
 							</form>
 						</tr>
-					</table>
-					</div>
-				</div>
+						</table>
+						</div>
 					<label class="form-label" for=subject-f1-select></label>
 					<table style="width: 100%;">
-					<%for(TestListSubject object : test_list_subjectlist){ %>
+						<c:forEach var="obj" items="${test_list_subjectlist}" >
 						<tr>
-							<%=System.out.println(object.getEntYear()); %>
-							<td><%=object.getEntYear()%></td>
-							<td><%=object.getClassNum()%></td>
-							<td><%=object.getStudentNo()%></td>
-							<td><%=object.getStudentName()%></td>
-							<% List<Integer> points = object.getPoints();%>
-							<td><%= points.get(0) %></td> <%-- 1回目の得点 --%>
-							<td><%= points.get(1) %></td> <%-- 2回目の得点 --%>
+							<td>${obj.entYear}</td>
+							<td>${obj.classNum}</td>
+							<td>${obj.studentNo}</td>
+							<td>${obj.studentName}</td>
+
+							<td>${obj.points[0]}</td> <%-- 1回目の得点 --%>
+							<td>${obj.points[1]}</td> <%-- 2回目の得点 --%>
 						</tr>
-					<%} %>
+						</c:forEach>
 					</table>
+				</div>
 		</section>
 	</c:param>
 </c:import>

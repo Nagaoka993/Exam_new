@@ -25,10 +25,10 @@ public class TestListSubjectDao extends Dao{
 				//学生別テスト結果インスタンスを初期化
 				TestListSubject testlistsubject = new TestListSubject();
 				//学生別テスト結果インスタンスに検索結果をセット
-				testlistsubject.setEntYear(rSet.getInt(""));
-				testlistsubject.setClassNum(rSet.getString(""));
-				testlistsubject.setStudentNo(rSet.getString(""));
-				testlistsubject.setStudentName(rSet.getString(""));
+				testlistsubject.setEntYear(rSet.getInt("ent_year"));
+				testlistsubject.setClassNum(rSet.getString("t.class_num"));
+				testlistsubject.setStudentNo(rSet.getString("no"));
+				testlistsubject.setStudentName(rSet.getString("name"));
 				//1回目のポイントと2回目のポイントを格納するディクショナリー
 				testlistsubject.setPoints(rSet.getInt("test1"),rSet.getInt("test2"));
 				list.add(testlistsubject);
@@ -40,7 +40,7 @@ public class TestListSubjectDao extends Dao{
 	}
 
 	//
-	public List<TestListSubject> filter(int entYear,String classNum,Subject subject,School school) throws Exception{
+	public ArrayList<TestListSubject> filter(int entYear,String classNum,Subject subject,School school) throws Exception{
 		//リストを初期化
 		ArrayList<TestListSubject> list = new ArrayList<>();
 		//コネクションを確立
@@ -61,9 +61,9 @@ public class TestListSubjectDao extends Dao{
 					 +" student s on t.student_no = s.NO"//学生番号を条件に結合する
 					 +" where"//取得したい行を絞り込む
 					 +" s.ent_year = ? "
-					 +" and t.class_num = ?"
+					 +" and .class_num = ?"
 					 +" and t.subject_cd = ?"
-					 +" and t.school_cd= ?"
+					 +" and t.school_cd= ? "
 					 +" GROUP BY"//学生番号と科目コードの一致する行を結合する
 					 +" t.STUDENT_NO,"
 					 +" t.SUBJECT_CD"

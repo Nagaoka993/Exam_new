@@ -44,7 +44,7 @@ public class TestListSubjectExecuteAction extends Action{
 			//Daoを初期化
 			TestListSubjectDao testlistsubjectDao = new TestListSubjectDao();
 			//リストを初期化
-			List<TestListSubject> list = new ArrayList<>();
+			List<TestListSubject> list = new ArrayList<TestListSubject>();
 			list = testlistsubjectDao.filter(ent_year,class_num, subject, teacher.getSchool());
 
 			//リストをセッションに渡す
