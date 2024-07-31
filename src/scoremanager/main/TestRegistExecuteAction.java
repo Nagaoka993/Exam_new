@@ -18,7 +18,6 @@ import dao.TestDao;
 import tool.Action;
 
 
-
 public class TestRegistExecuteAction extends Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -62,7 +61,7 @@ public class TestRegistExecuteAction extends Action{
 		req.setAttribute("ent_year_list",ent_year_list);
 		req.setAttribute("subjectname_list",subjectname_list);
 		req.setAttribute("classnum_list", classnum_list);
-		req.setAttribute("Test_list", list);
+		session.setAttribute("Test_list", list);
 		//デバッグ用
 		System.out.println(list);
 
