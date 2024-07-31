@@ -17,6 +17,6 @@
 		</section>
 		<br>
 		<br>
-		<a href="login.jsp">ログイン</a>
+		<a href="../studentmanager/login.jsp">ログイン</a>
 	</c:param>
 </c:import>
