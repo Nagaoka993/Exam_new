@@ -15,7 +15,7 @@ public class TestListStudent {
 	public String getSubjectCd(){
 		return subjectCd;
 	}
-	public void setSubjectCd(String SubjectCd){
+	public void setSubjectCd(String subjectCd){
 		this.subjectCd = subjectCd;
 	}
 	public int getNum(){

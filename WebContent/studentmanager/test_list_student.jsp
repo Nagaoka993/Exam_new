@@ -6,6 +6,7 @@
 <% ArrayList<String> ent_year_list = (ArrayList<String>) session.getAttribute("ent_year_list"); %>
 <% ArrayList<String> classnum_list = (ArrayList<String>) session.getAttribute("classnum_list"); %>
 <% ArrayList<String> subjectname_list = (ArrayList<String>) session.getAttribute("subjectname_list"); %>
+<% List<TestListSubject> test_list_subjectlist = (List<TestListSubject>)session.getAttribute("list");%>
 <% ArrayList<TestListStudent> test_list_studentlist = (ArrayList<TestListStudent>)request.getAttribute("student_list");%>
 <c:import url="../common/base.jsp">
 	<c:param name="title">
@@ -83,18 +84,25 @@
 						</tr>
 						</table>
 						</div>
+						</section>
 					<label class="form-label" for=subject-f1-select></label>
 					<table style="width: 100%;">
-						<c:forEach var="obj" items="${test_list_studentlist}" >
+
 						<tr>
-							<td>${obj.studentName}</td>
-							<td>${obj.studentCd}</td>
-							<td>${obj.num}</td>
-							<td>${obj.point}</td>
+							<th>科目名</th>
+							<th>科目コード</th>
+							<th>回数</th>
+							<th>点数</th>
 						</tr>
-						</c:forEach>
+						<% for(TestListStudent object: test_list_studentlist) {%>
+						<tr>
+							<td><%=object.getSubjectName() %></td>
+							<td><%=object.getSubjectCd()%></td>
+							<td><%=object.getNum() %></td>
+							<td><%=object.getPoint() %></td>
+						</tr>
+						<%} %>
 					</table>
 				</div>
-		</section>
 	</c:param>
 </c:import>
