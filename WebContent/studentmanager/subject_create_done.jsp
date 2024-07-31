@@ -14,10 +14,10 @@
 			</div>
 			<div class="lh-lg row" style="margin-top: 8rem;">
 				<div class="mx-3 col-1">
-					<a href="../studentmanager/subject_create.jsp">戻る</a>
+					<a href="../scoremanager.main/SubjectCreate.action">戻る</a>
 				</div>
 				<div class="mx-3 col-2">
-					<a href="../studentmanager/subject_list.jsp">科目一覧</a>
+					<a href="../scoremanager.main/Subjectlist.action">科目一覧</a>
 				</div>
 			</div>
 
